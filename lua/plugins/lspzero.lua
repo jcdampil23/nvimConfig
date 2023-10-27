@@ -5,8 +5,7 @@
 
 -- AutoComplete line 87
 -- shift+space show completion menu
--- tab select_next_item
--- tab select_previous_item
+-- arrow keys to select from autocomplete
 return {
     {
         'nvimtools/none-ls.nvim',
