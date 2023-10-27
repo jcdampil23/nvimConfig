@@ -42,7 +42,7 @@ Whenever I write <leader> it refers to the space key (unless you edit the leader
 `:w` will save the file `:q` will quit neovim back to terminal
 
 ## Keymaps
-If it doesnt have a + you press it succession
+If it doesnt have a + you press it in succession
 Keymaps are also case sensitive
 
 `leader q` will return you to netrw
