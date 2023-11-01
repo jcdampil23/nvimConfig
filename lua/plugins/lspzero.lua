@@ -8,10 +8,6 @@
 -- arrow keys to select from autocomplete
 return {
     {
-        'nvimtools/none-ls.nvim',
-        lazy = false,
-    },
-    {
         'VonHeikemen/lsp-zero.nvim',
         branch = 'v3.x',
         lazy = true,
@@ -24,7 +20,6 @@ return {
     {
         'williamboman/mason.nvim',
         lazy = false,
-        config = true,
     },
 
     -- LSP
@@ -32,9 +27,11 @@ return {
         'neovim/nvim-lspconfig',
         cmd = { 'LspInfo', 'LspInstall', 'LspStart' },
         event = { 'BufReadPre', 'BufNewFile' },
+        lazy=true,
         dependencies = {
             { 'hrsh7th/cmp-nvim-lsp' },
             { 'williamboman/mason-lspconfig.nvim' },
+            {'nvimtools/none-ls.nvim'},
         },
         config = function()
             local lsp_zero = require('lsp-zero')
@@ -50,25 +47,29 @@ return {
                     opts);
                 vim.keymap.set('n', '<leader>i', function() vim.lsp.buf.hover() end, opts);
                 vim.keymap.set('n', '<leader>o', function() vim.diagnostic.open_float() end, opts);
+                vim.keymap.set("n", "<leader>ca", function() vim.lsp.buf.code_action() end, opts)
             end)
 
             local sources = {
-                null_ls.builtins.formatting.eslint,
-                null_ls.builtins.code_actions.gitsigns,
+                null_ls.builtins.formatting.eslint.with({
+                    only_local = 'node_modules/.bin',
+                }),
+                -- null_ls.builtins.diagnostics.eslint.with({
+                --     only_local = "node_modules/.bin",
+                -- }),
             }
-
             null_ls.setup({ sources = sources })
 
-            lsp_zero.format_on_save({
-                format_opts = {
-                    async = true,
-                    timeout_ms = 10000,
-                },
-                servers = {
-                    ['tsserver'] = { 'javascript', 'typescript' }
+            require("mason").setup({
+                ui = {
+                    icons = {
+                        package_installed = "✓",
+                        package_pending = "➜",
+                        package_uninstalled = "✗"
+                    },
+                    border = 'rounded',
                 }
-            });
-
+            })
             require('mason-lspconfig').setup({
                 ensure_installed = {},
                 handlers = {
@@ -85,7 +86,8 @@ return {
     -- Autocompletion
     {
         'hrsh7th/nvim-cmp',
-        event = 'InsertEnter',
+        lazy=true,
+        event = { 'BufReadPre', 'BufNewFile' },
         dependencies = {
             { 'L3MON4D3/LuaSnip' },
         },
@@ -95,8 +97,13 @@ return {
             local cmp = require('cmp')
 
             cmp.setup({
+                window = {
+                    completion = cmp.config.window.bordered({}),
+                    documentation = cmp.config.window.bordered({}),
+                },
                 formatting = lsp_zero.cmp_format(),
                 mapping = cmp.mapping.preset.insert({
+                    ['<C-Space>'] = cmp.mapping.complete({ reason = cmp.ContextReason.Auto }),
                     ['<S-Space>'] = cmp.mapping(cmp.mapping.complete(), { "i", "n", "s" }),
                     ['<CR>'] = cmp.mapping.confirm({ select = true }),
                 })

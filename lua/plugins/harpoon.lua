@@ -4,10 +4,11 @@
 -- Add file to harpoon with <leader>
 return {
 	"ThePrimeagen/harpoon",
-    lazy = false,
+    lazy = true,
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 	},
+    event = { "BufReadPre", "BufNewFile" },
 	config = true,
 	keys = {
 		{ "<leader>a", "<cmd>lua require('harpoon.mark').add_file()<cr>", desc = "Mark file with harpoon" },

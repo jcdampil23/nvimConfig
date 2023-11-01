@@ -1,4 +1,6 @@
 
+
+
 -- <leader> is spacebar, change it in config/set.lua
 local keymap = vim.keymap.set;
 
@@ -6,7 +8,7 @@ local keymap = vim.keymap.set;
 keymap('n', '<leader>q', ':Ex<CR>');
 
 -- Go Back to last buffer (for us just usually means go back to last file)
-keymap("n", "gb", "<CS-O>")
+keymap("n", "<C-b>", "<CS-O>")
 
 -- Open Lazy Plugin Manager
 keymap('n', '<leader>l', ':Lazy<CR>');
@@ -41,7 +43,17 @@ keymap("n", "<leader>r", [[:%s/\<<c-r><c-w>\>/<c-r><c-w>/gi<left><left><left>]])
 -- Find and replace within selection (you will write the word)
 keymap("v", "<leader>r", [[:s///g<left><left><left>]])
 
--- File finder and Text Finder
+-- FzfLua Plugin File finder and Text Finder
 keymap('n',"<leader>pf", ":FzfLua files<CR>");
 keymap('n',"<leader>ps", ":FzfLua live_grep_native<CR>");
+-- keymap("", "<C-i>", require("lsp_lines").toggle, { desc = "Toggle lsp_lines" })
+keymap('n', "<leader>f", ':EslintFixAll<CR>')
 
+-- Open Mason Plugin Window (LSP Installer)
+keymap('n','<leader>m', ":Mason<CR>")
+
+-- Close unactive buffers (buffer meaning file) 
+keymap("n","<leader>x", ":%bd|e#");
+
+-- View Abstract Syntax Tree (AST)
+keymap("n","<leader>pi", ":InspectTree<CR>");

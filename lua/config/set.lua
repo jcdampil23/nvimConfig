@@ -23,6 +23,8 @@ vim.opt.incsearch = true;
 
 -- enables 24bit color (if terminal doesn't support it, color schemes look like shit) 
 vim.opt.termguicolors = true;
+vim.opt.pumblend = 0;
+vim.opt.cursorline = true;
 
 -- makes it so that theres always (n) lines above and below when scrolling
 vim.opt.scrolloff = 8;
@@ -35,13 +37,13 @@ vim.showtabline = true;
 
 -- changes netrw to display only current directory with details 
 -- 0(no details), 1(details), 2(Why tho), 3(looks like vscode file explorer)
-vim.g.netrw_liststyle = 1;
-
-vim.opt.cmdheight = 2;
+vim.g.netrw_liststyle = 0;
 
 -- Removes netrw banner
 vim.g.netrw_banner = 0;
 vim.g.netrw_special_syntax = 3;
+
+vim.opt.conceallevel=2;
 
 -- Remove virtual diagnostic files (trust me it's overwhelming)
 vim.diagnostic.config({

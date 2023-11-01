@@ -37,7 +37,7 @@ Whenever I write <leader> it refers to the space key (unless you edit the leader
 
 `Visual Line Mode` will select the lines from where you first entered and moved, Pressing `shift+v` will get you here
 
-`Visual Block Mode` will select the lines vertically and horizontally from where you first entered and moved, Pressing `shift+v` will get you here
+`Visual Block Mode` will select the lines vertically and horizontally from where you first entered and moved, Pressing `ctrl+v` will get you here
 
 `:w` will save the file `:q` will quit neovim back to terminal
 
@@ -63,6 +63,20 @@ Keymaps are also case sensitive
 ## Plugin keymaps
 ### Lazy.nvim
 `leader l` will open the lazy plugin manager
+
+### Mason.nvim
+`leader m` will open the Mason LSP installer 
+
+### Comment.nvim
+`gcc` to comment selection or line
+
+### Treesitter IndentObject
+`vai` to select function block
+`vii` to select inner function block
+
+### LSPLines
+`ctrl+i` to toggle line diagnostics
+
 ### Fzf.lua
 `leader pf` will open up a file finder with a previwer
 
@@ -80,6 +94,7 @@ Keymaps are also case sensitive
 `leader e` will show you what files are in harpoon
 
 `leader [j, k, l, ;, n]` will jump to the file in harpoon from 1 -5
+
 ### LSP Zero
 `gd` will jump to definition
 
@@ -89,6 +104,7 @@ Keymaps are also case sensitive
 `leader o` will show the error diagnostic
 
 `shift+space` will show the autocomplete window in insert mode
+
 
 ## How to Edit?
 ### Keymaps
